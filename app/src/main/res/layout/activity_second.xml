@@ -7,14 +7,14 @@
     android:orientation="vertical"
     android:background="@drawable/cf"
     tools:context=".MainActivity"
-    android:id="@+id/fondoCartas">
+    android:id="@+id/cartas">
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:background="@drawable/botonup"
-        android:id="@+id/botonUp"/>
+        android:id="@+id/arriba"/>
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -25,7 +25,7 @@
             android:layout_height="150dp"
             android:layout_gravity="bottom"
             android:background="@drawable/botondown"
-            android:id="@+id/botonDown"/>
+            android:id="@+id/abajo"/>
     </FrameLayout>
 
 

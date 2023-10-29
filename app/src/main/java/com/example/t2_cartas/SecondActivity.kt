@@ -3,16 +3,15 @@ package com.example.t2_cartas
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnClickListener
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.snackbar.Snackbar
 
 class SecondActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var botonUp: AppCompatButton
-    private lateinit var botonDown: AppCompatButton
-    private lateinit var fondoCartas: LinearLayoutCompat
+    private lateinit var arriba: AppCompatButton
+    private lateinit var abajo: AppCompatButton
+    private lateinit var cartas: LinearLayoutCompat
     private var nombre: String = ""
     private var contador: Int = 0
     private var carta: Int = 0
@@ -22,113 +21,117 @@ class SecondActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         val bundle = intent.extras
-        nombre = bundle?.getString("nombre").toString() ?: "Invitado"
+        nombre = bundle?.getString("nombre") ?: "Invitado"
         instancias()
         acciones()
-        Snackbar.make(fondoCartas, "Bienvenido a la aplicación " + nombre, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(cartas, "Bienvenido a la aplicación " + nombre, Snackbar.LENGTH_INDEFINITE)
             .setAction("OK") {
+                arriba.isEnabled = true
+                abajo.isEnabled = true
                 jugar()
             }.show()
     }
 
 
     private fun acciones() {
-        botonUp.setOnClickListener(this)
-        botonDown.setOnClickListener(this)
+        arriba.setOnClickListener(this)
+        abajo.setOnClickListener(this)
     }
 
     private fun instancias() {
-        botonUp = findViewById(R.id.botonUp)
-        botonDown = findViewById(R.id.botonDown)
-        fondoCartas = findViewById(R.id.fondoCartas)
+        arriba = findViewById(R.id.arriba)
+        abajo = findViewById(R.id.abajo)
+        cartas = findViewById(R.id.cartas)
+        arriba.isEnabled = false
+        abajo.isEnabled = false
     }
 
     override fun onClick(v: View?) {
+        val cartaAntigua = carta  // Guardamos la carta antigua antes de obtener una nueva
 
         when (v!!.id) {
-            R.id.botonUp -> {
-                val cartaAntigua = carta
-                carta = jugar()
-                if (cartaAntigua>carta) {
-                    Snackbar.make(fondoCartas, "Has fallado, tu puntuacion es "+contador, Snackbar.LENGTH_INDEFINITE)
+            R.id.arriba -> {
+                val nuevaCarta = jugar()
+                if (cartaAntigua >= nuevaCarta) {
+                    Snackbar.make(cartas, "Has fallado, tu puntuacion es " + contador, Snackbar.LENGTH_INDEFINITE)
                         .setAction("OK") {
-                            onDestroy()
+                            finish()
                         }.show()
-                }else if(cartaAntigua==carta){
-
-                }else {
+                } else {
                     contador++
                 }
+                carta = nuevaCarta
             }
-            R.id.botonDown ->{
-                val cartaAntigua = carta
-                carta = jugar()
-                if (cartaAntigua<carta) {
-                    Snackbar.make(fondoCartas, "Has fallado, tu puntuacion es "+contador, Snackbar.LENGTH_INDEFINITE)
-                        .setAction("OK") {
-                            onDestroy()
-                        }.show()
-                }else if(cartaAntigua==carta){
 
-                }else {
-                }
+            R.id.abajo -> {
+                val nuevaCarta = jugar()
+                if (cartaAntigua <= nuevaCarta) {
+                    Snackbar.make(cartas, "Has fallado, tu puntuacion es " + contador, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("OK") {
+                            finish()
+                        }.show()
+                } else {
                     contador++
                 }
+                carta = nuevaCarta
             }
         }
-        fun jugar(): Int {
+    }
+
+
+    fun jugar(): Int {
             var carta: Int = (Math.random() * 13).toInt() + 1
             when (carta) {
                 1 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c1, null)
+                    cartas.background = resources.getDrawable(R.drawable.c1, null)
                 }
 
                 2 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c2, null)
+                    cartas.background = resources.getDrawable(R.drawable.c2, null)
                 }
 
                 3 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c3, null)
+                    cartas.background = resources.getDrawable(R.drawable.c3, null)
                 }
 
                 4 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c4, null)
+                    cartas.background = resources.getDrawable(R.drawable.c4, null)
                 }
 
                 5 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c5, null)
+                    cartas.background = resources.getDrawable(R.drawable.c5, null)
                 }
 
                 6 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c6, null)
+                    cartas.background = resources.getDrawable(R.drawable.c6, null)
                 }
 
                 7 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c7, null)
+                    cartas.background = resources.getDrawable(R.drawable.c7, null)
                 }
 
                 8 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c8, null)
+                    cartas.background = resources.getDrawable(R.drawable.c8, null)
                 }
 
                 9 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c9, null)
+                    cartas.background = resources.getDrawable(R.drawable.c9, null)
                 }
 
                 10 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c10, null)
+                    cartas.background = resources.getDrawable(R.drawable.c10, null)
                 }
 
                 11 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c11, null)
+                    cartas.background = resources.getDrawable(R.drawable.c11, null)
                 }
 
                 12 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c12, null)
+                    cartas.background = resources.getDrawable(R.drawable.c12, null)
                 }
 
                 13 -> {
-                    fondoCartas.background = resources.getDrawable(R.drawable.c13, null)
+                    cartas.background = resources.getDrawable(R.drawable.c13, null)
                 }
             }
             return carta

@@ -12,8 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
-    private lateinit var botonEmpezar: AppCompatButton
-    private lateinit var textoNombre: AppCompatEditText
+    private lateinit var empezar: AppCompatButton
+    private lateinit var nombre: AppCompatEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,26 +23,26 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun acciones() {
-        botonEmpezar.setOnClickListener(this)
+        empezar.setOnClickListener(this)
     }
 
     private fun instancias() {
-        botonEmpezar = findViewById(R.id.botonEmpezar)
-        textoNombre = findViewById(R.id.textoNombre)
+        empezar = findViewById(R.id.empezar)
+        nombre = findViewById(R.id.nombre)
     }
 
 
     override fun onClick(v: View?) {
 
         when (v!!.id) {
-            R.id.botonEmpezar -> {
-                if(textoNombre.text!!.isEmpty()){
+            R.id.empezar -> {
+                if(nombre.text!!.isEmpty()){
                     Snackbar.make(v, resources.getString(R.string.fallo), Snackbar.LENGTH_LONG).show()
                 }else{
-                    Snackbar.make(v,"Perfecto "+textoNombre.text+", quieres empezar", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(v,"Perfecto "+nombre.text+", quieres empezar", Snackbar.LENGTH_INDEFINITE)
                         .setAction("OK"){
                             val intent = Intent(applicationContext, SecondActivity::class.java)
-                            intent.putExtra("nombre",textoNombre.text)
+                            intent.putExtra("nombre",nombre.text.toString())
                             startActivity(intent)
                         }.show()
 

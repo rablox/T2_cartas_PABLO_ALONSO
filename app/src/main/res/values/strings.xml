@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">T2_Cartas</string>
-    <string name="texto_nombre">Introduce tu nombre</string>
+    <string name="app_name">Cartas</string>
+    <string name="texto_nombre">introduce nombre</string>
     <string name="texto_empezar">EMPEZAR</string>
-    <string name="fallo">Por favor introduce nombre</string>
+    <string name="fallo">introduce nombre</string>
 </resources>
